@@ -1,0 +1,61 @@
+@use '@/styles/colors';
+
+.login {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: colors.$gradient-bg;
+    .login-form {
+        padding: 3.25rem 3.875rem;
+        border-radius: 2.25rem;
+        background-color: colors.$white;
+        width: 35rem;
+        .title {
+            color: colors.$black;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+        }
+        form {
+            margin-bottom: 2rem;
+            .app-input {
+                margin-bottom: 1.25rem;
+            }
+            .actions {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: space-between;
+                .reset-password-link {
+                    color: colors.$carmine-pink;
+                    font-size: 1rem;
+                    font-weight: 500;
+                }
+                .btn-enter {
+                    flex: 1 0 100%;
+                    margin-top: 2rem;
+                    padding: 0.75rem;
+                    background-color: colors.$secondary-blue;
+                    border: none;
+                    border-radius: 0.25rem;
+                    color: #ffffffe6;
+                    font-size: 1rem;
+                    font-weight: 600;
+                }
+            }
+        }
+        .non-existent-account {
+            font-family: 'Manrope', sans-serif;
+            text-align: center;
+            .register-link {
+                color: #2f89fc;
+                font-size: 1rem;
+                font-weight: 600;
+                margin-left: 0.625rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,41 @@
+@use '@/styles/colors';
+
+.app-checkbox {
+    display: flex;
+    align-items: center;
+    input {
+        display: none;
+    }
+    label {
+        display: inline-block;
+        height: 1.25rem;
+        width: 1.25rem;
+        border-radius: 0.313rem;
+        border: 1px solid colors.$secondary-silver;
+        .svg {
+            display: none;
+        }
+    }
+    span {
+        margin-left: 0.75rem;
+    }
+    &.check {
+        input:checked + label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .svg {
+                display: inline-block;
+            }
+        }
+    }
+    &.tab {
+        label {
+            border: none;
+            background-color: colors.$secondary-silver;
+        }
+        input:checked + label {
+            background-color: colors.$violet;
+        }
+    }
+}
