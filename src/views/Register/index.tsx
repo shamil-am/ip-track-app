@@ -2,9 +2,11 @@ import './style.scss';
 
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 
 import Input from '@/components/common/Input';
+import userService from '@/services/userService';
 import { IRegisterData } from '@/types/register';
 import { ERoutePaths } from '@/types/routePaths';
 import { registrationSchema } from '@/utils/constants/schemas';
@@ -17,8 +19,20 @@ const Register: FC = () => {
         formState: { errors },
     } = useForm<IRegisterData>({ resolver: yupResolver(registrationSchema) });
 
+    const navigate = useNavigate();
+
     const registerUser: SubmitHandler<IRegisterData> = async (data) => {
-        console.log('LoggedIn', data);
+        const response = await userService.registerUser(data);
+
+        if (response?.status === 200) {
+            toast('Hesab yaradildi!');
+            setTimeout(() => {
+                navigate(ERoutePaths.LOGIN);
+            }, 1000);
+            return;
+        }
+
+        toast.error(response?.data?.message);
     };
 
     return (
@@ -27,20 +41,26 @@ const Register: FC = () => {
                 <h2 className='title'>Hesab yarat</h2>
                 <h6 className='description'>Lorem ipsum!</h6>
                 <form onSubmit={handleSubmit(registerUser)}>
-                    <Input name='name' placeholder='Adnız' required hasError={!!errors.name} register={register} />
-                    <Input name='surname' placeholder='Soyadınız' hasError={!!errors.surname} register={register} />
                     <Input
-                        name='userName'
+                        name='firstName'
+                        placeholder='Adnız'
+                        required
+                        hasError={!!errors.firstName}
+                        register={register}
+                    />
+                    <Input name='lastName' placeholder='Soyadınız' hasError={!!errors.lastName} register={register} />
+                    <Input
+                        name='username'
                         placeholder='İstifadəçi adınız'
-                        hasError={!!errors.userName}
+                        hasError={!!errors.username}
                         register={register}
                     />
                     <Input name='email' placeholder='E-poçtunuz' hasError={!!errors.email} register={register} />
                     <Input name='password' placeholder='Şifrəniz' hasError={!!errors.password} register={register} />
                     <Input
-                        name='passwordConfirm'
+                        name='confirmedPassword'
                         placeholder='Təkrarlanmış şifrəniz'
-                        hasError={!!errors.passwordConfirm}
+                        hasError={!!errors.confirmedPassword}
                         register={register}
                     />
 
@@ -53,6 +73,18 @@ const Register: FC = () => {
                     <button className='btn-register'>Qeydiyyat</button>
                 </form>
             </div>
+            <ToastContainer
+                position='top-right'
+                autoClose={1000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme='light'
+            />
         </div>
     );
 };
