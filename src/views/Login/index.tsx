@@ -2,10 +2,12 @@ import './style.scss';
 
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 
 import Checkbox from '@/components/common/Checkbox';
 import Input from '@/components/common/Input';
+import userService from '@/services/userService';
 import { ILoginData } from '@/types/login';
 import { ERoutePaths } from '@/types/routePaths';
 import { loginSchema } from '@/utils/constants/schemas';
@@ -18,8 +20,20 @@ const Login: FC = () => {
         formState: { errors },
     } = useForm<ILoginData>({ resolver: yupResolver(loginSchema) });
 
+    const navigate = useNavigate();
+
     const loginUser: SubmitHandler<ILoginData> = async (data) => {
-        console.log('LoggedIn', data);
+        const response = await userService.loginUser(data);
+
+        if (response?.status === 200) {
+            toast('Hesab yaradildi!');
+            setTimeout(() => {
+                navigate(ERoutePaths.LOGIN);
+            }, 1000);
+            return;
+        }
+
+        toast.error(response?.data?.message);
     };
 
     return (
@@ -56,6 +70,18 @@ const Login: FC = () => {
                     </Link>
                 </p>
             </div>
+            <ToastContainer
+                position='top-right'
+                autoClose={1000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme='light'
+            />
         </div>
     );
 };
