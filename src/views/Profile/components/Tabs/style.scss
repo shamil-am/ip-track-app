@@ -1,0 +1,17 @@
+@use '@/styles/colors';
+
+.tabs {
+    display: flex;
+    align-items: center;
+    column-gap: 1.875rem;
+    .tab-element {
+        padding: 1.25rem 2rem;
+        border-top-left-radius: 1.375rem;
+        border-top-right-radius: 1.375rem;
+        border: none;
+        background: #f0efef8c;
+        &.active {
+            background-color: #fff;
+        }
+    }
+}

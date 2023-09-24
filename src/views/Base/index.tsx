@@ -1,7 +1,11 @@
+import './style.scss';
+
 import { FC } from 'react';
 import { Navigate, Outlet, useLoaderData } from 'react-router';
 
 import { ERoutePaths } from '@/types/routePaths';
+
+import Header from './components/Header';
 
 const Base: FC = () => {
     const userData = useLoaderData();
@@ -11,7 +15,8 @@ const Base: FC = () => {
     }
 
     return (
-        <div className='app'>
+        <div className='base'>
+            <Header />
             <Outlet />
         </div>
     );
