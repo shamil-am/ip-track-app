@@ -1,0 +1,75 @@
+@use '@/styles/colors';
+
+.user-profile {
+    position: relative;
+    .profile-top {
+        display: flex;
+        align-items: center;
+        padding-bottom: 1.125rem;
+        &:hover {
+            cursor: pointer;
+            & + .profile-bottom {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+        .notification {
+            display: flex;
+            align-items: center;
+            margin-right: 1rem;
+            position: relative;
+            .badge {
+                position: absolute;
+                top: 0;
+                right: 0;
+                background-color: colors.$white;
+                border-radius: 1.25rem;
+                color: colors.$violet;
+                padding: 0.5px 6px;
+            }
+        }
+        .user-name {
+            color: colors.$light-black;
+            font-size: 0.875rem;
+            font-weight: 400;
+            margin-right: 0.625rem;
+        }
+        .user-image {
+            height: 3.25rem;
+            width: 3.25rem;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+    .profile-bottom {
+        background-color: colors.$white;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        padding: 0.25rem;
+        border-radius: 0.75rem;
+        opacity: 0;
+        visibility: hidden;
+        &:hover {
+            opacity: 1;
+            visibility: visible;
+        }
+        ul {
+            li {
+                display: flex;
+                align-items: center;
+                padding: 0.625rem;
+                &:first-child {
+                    margin-bottom: 0.25rem;
+                }
+                .menu-link {
+                    color: colors.$light-black;
+                    font-size: 0.875rem;
+                    font-weight: 400;
+                    margin-left: 0.25rem;
+                }
+            }
+        }
+    }
+}

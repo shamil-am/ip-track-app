@@ -4,7 +4,6 @@ import { FC } from 'react';
 
 import { useAppSelector } from '@/hooks';
 
-import Header from './components/Header';
 import IpInfoTable from './components/IpInfoTable';
 import Map from './components/Map';
 
@@ -19,8 +18,7 @@ const Home: FC = () => {
         : null;
 
     return (
-        <div className='home-page'>
-            <Header />
+        <div className='home'>
             <Map markerCoords={markerCoords} />
             {ipState.ipInfo && <IpInfoTable ipInfo={ipState.ipInfo} />}
         </div>

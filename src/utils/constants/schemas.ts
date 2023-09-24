@@ -16,3 +16,15 @@ export const registrationSchema = yup.object().shape({
         .oneOf([yup.ref('password')])
         .required(),
 });
+
+export const editSchema = yup.object().shape({
+    fileId: yup.number().required(),
+    firstName: yup.string().required(),
+    lastName: yup.string().required(),
+    fatherName: yup.string(),
+    birthDate: yup.string(),
+    birthPlace: yup.string(),
+    gender: yup.string(),
+    email: yup.string().email().required(),
+    username: yup.string().required(),
+});
