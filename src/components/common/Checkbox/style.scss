@@ -12,7 +12,7 @@
         width: 1.25rem;
         border-radius: 0.313rem;
         border: 1px solid colors.$secondary-silver;
-        .svg {
+        svg {
             display: none;
         }
     }
@@ -24,7 +24,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            .svg {
+            svg {
                 display: inline-block;
             }
         }

@@ -1,6 +1,6 @@
 export enum ERoutePaths {
     LOGIN = '/login',
     REGISTER = '/register',
-    HOME = '/home',
+    HOME = '/',
     PROFILE = '/profile',
 }
