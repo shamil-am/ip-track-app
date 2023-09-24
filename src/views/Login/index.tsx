@@ -11,6 +11,7 @@ import userService from '@/services/userService';
 import { ILoginData } from '@/types/login';
 import { ERoutePaths } from '@/types/routePaths';
 import { loginSchema } from '@/utils/constants/schemas';
+import { setToLocalStorage } from '@/utils/helpers';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const Login: FC = () => {
@@ -26,14 +27,12 @@ const Login: FC = () => {
         const response = await userService.loginUser(data);
 
         if (response?.status === 200) {
-            toast('Hesab yaradildi!');
-            setTimeout(() => {
-                navigate(ERoutePaths.LOGIN);
-            }, 1000);
+            setToLocalStorage('accessToken', response.data.data);
+            navigate(ERoutePaths.HOME);
             return;
         }
 
-        toast.error(response?.data?.message);
+        toast.error(response.data?.message);
     };
 
     return (
