@@ -1,5 +1,6 @@
 import './style.scss';
 
+import Cookie from 'js-cookie';
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,8 +11,9 @@ import Input from '@/components/common/Input';
 import userService from '@/services/userService';
 import { ILoginData } from '@/types/login';
 import { ERoutePaths } from '@/types/routePaths';
+import { accessToken } from '@/utils/constants/keys';
 import { loginSchema } from '@/utils/constants/schemas';
-import { setToLocalStorage } from '@/utils/helpers';
+import { encryptData, getTokenExpiredTime } from '@/utils/helpers';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const Login: FC = () => {
@@ -27,8 +29,13 @@ const Login: FC = () => {
         const response = await userService.loginUser(data);
 
         if (response?.status === 200) {
-            setToLocalStorage('accessToken', response.data.data);
+            const token = encryptData(response.data.data);
+            const expiredTime = getTokenExpiredTime(6);
+
+            Cookie.set(accessToken, token, { expires: expiredTime });
+
             navigate(ERoutePaths.HOME);
+
             return;
         }
 

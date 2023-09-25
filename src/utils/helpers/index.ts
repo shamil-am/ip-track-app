@@ -1,19 +1,16 @@
 import CryptoJS from 'crypto-js';
 
-export const setToLocalStorage = (key: string, value: string) => {
-    const encryptedToken = CryptoJS.AES.encrypt(value, import.meta.env.VITE_TOKEN_SALT_KEY).toString();
-    localStorage.setItem(key, encryptedToken);
+export const encryptData = (value: string) =>
+    CryptoJS.AES.encrypt(value, import.meta.env.VITE_TOKEN_SALT_KEY).toString();
+
+export const decryptData = (value: string) => {
+    const bytes = CryptoJS.AES.decrypt(value, import.meta.env.VITE_TOKEN_SALT_KEY);
+    const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+
+    return decryptedData;
 };
 
-export const getFromLocalStorage = (key: string) => {
-    const encryptedToken = localStorage.getItem(key);
-
-    if (encryptedToken) {
-        const bytes = CryptoJS.AES.decrypt(encryptedToken, import.meta.env.VITE_TOKEN_SALT_KEY);
-        const decryptedToken = bytes.toString(CryptoJS.enc.Utf8);
-
-        return decryptedToken;
-    }
-
-    return null;
+export const getTokenExpiredTime = (minutes: number) => {
+    const now = new Date();
+    return new Date(now.getTime() + minutes * 60000);
 };
