@@ -1,7 +1,7 @@
 import './style.scss';
 
 import Cookie from 'js-cookie';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
@@ -25,9 +25,11 @@ const Login: FC = () => {
 
     const navigate = useNavigate();
 
-    const loginUser: SubmitHandler<ILoginData> = async (data) => {
-        const response = await userService.loginUser(data);
+    const [isLoading, setIsLoading] = useState(false);
 
+    const loginUser: SubmitHandler<ILoginData> = async (data) => {
+        setIsLoading(true);
+        const response = await userService.loginUser(data);
         if (response?.status === 200) {
             const token = encryptData(response.data.data);
             const expiredTime = getTokenExpiredTime(6);
@@ -40,6 +42,7 @@ const Login: FC = () => {
         }
 
         toast.error(response.data?.message);
+        setIsLoading(false);
     };
 
     return (
@@ -66,7 +69,10 @@ const Login: FC = () => {
                         <Link to={ERoutePaths.REGISTER} className='reset-password-link'>
                             Şifrəni unutmusuz?
                         </Link>
-                        <button className='btn-enter'>Daxil ol</button>
+
+                        <button className='btn-enter' disabled={isLoading}>
+                            Daxil ol
+                        </button>
                     </div>
                 </form>
                 <p className='non-existent-account'>

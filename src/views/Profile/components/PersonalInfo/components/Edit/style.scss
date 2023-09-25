@@ -3,14 +3,30 @@
 .edit {
     .profile-image {
         margin-bottom: 2.75rem;
+        display: inline-block;
+        position: relative;
         img {
             height: 7rem;
             width: 7rem;
             object-fit: cover;
             border-radius: 50%;
         }
+        .upload-image {
+            height: 2rem;
+            width: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            border-radius: 50%;
+            position: absolute;
+            top: 65%;
+            right: 0;
+            background-color: #eaecff;
+        }
     }
     .general {
+        padding-right: 2rem;
         .title {
             font-size: 1.125rem;
             font-weight: 600;

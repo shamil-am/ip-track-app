@@ -18,13 +18,13 @@ export const registrationSchema = yup.object().shape({
 });
 
 export const editSchema = yup.object().shape({
-    fileId: yup.number().required(),
+    fileId: yup.number().notRequired(),
     firstName: yup.string().required(),
     lastName: yup.string().required(),
-    fatherName: yup.string(),
-    birthDate: yup.string(),
-    birthPlace: yup.string(),
-    gender: yup.string(),
+    fatherName: yup.string().notRequired(),
+    birthDate: yup.string().notRequired(),
+    birthPlace: yup.string().notRequired(),
+    gender: yup.string().notRequired(),
     email: yup.string().email().required(),
     username: yup.string().required(),
 });
