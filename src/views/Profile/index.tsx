@@ -4,6 +4,7 @@ import { FC, useState } from 'react';
 
 import { ETabs, ITabElement } from '@/types/profile';
 
+import Education from './components/EducationInfo';
 import PersonalInfo from './components/PersonalInfo';
 import Tabs from './components/Tabs';
 
@@ -18,7 +19,7 @@ const Profile: FC = () => {
     return (
         <div className='profile'>
             <Tabs tablist={tabList} activeTab={activeTab} changeActiveTab={setActiveTab} />
-            {activeTab === ETabs.PERSONAL ? <PersonalInfo /> : <h1>Education</h1>}
+            {activeTab === ETabs.PERSONAL ? <PersonalInfo /> : <Education />}
         </div>
     );
 };
