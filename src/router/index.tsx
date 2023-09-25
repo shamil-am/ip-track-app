@@ -2,7 +2,6 @@ import { createBrowserRouter, RouteObject } from 'react-router-dom';
 
 import PrivateRoute from '@/components/routing/PrivateRoute';
 import PublicRoute from '@/components/routing/PublicRoute';
-import userService from '@/services/userService';
 import { ERoutePaths } from '@/types/routePaths';
 import Base from '@/views/Base';
 import Home from '@/views/Home';
@@ -34,13 +33,6 @@ const routes: RouteObject[] = [
                 <Base />
             </PrivateRoute>
         ),
-        loader: async () => {
-            const response = await userService.getProfileData();
-            if (response.status === 200) {
-                return response.data?.data;
-            }
-            return null;
-        },
         children: [
             {
                 index: true,
