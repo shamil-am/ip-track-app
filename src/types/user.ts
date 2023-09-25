@@ -3,12 +3,12 @@ export interface IUserProfileData {
     username: string;
     firstName: string;
     lastName: string;
-    fatherName: string;
-    birthPlace: string;
-    birthDate: string;
-    gender: string;
+    fatherName: string | null;
+    birthPlace: string | null;
+    birthDate: string | null;
+    gender: string | null;
     email: string;
-    educationType: string;
+    educationType: string | null;
 }
 
 export interface IUserEditData {
@@ -18,7 +18,7 @@ export interface IUserEditData {
     birthDate: string;
     birthPlace: string;
     gender: string;
-    fileId: number;
+    fileId: number | null;
     email: string;
     username: string;
 }

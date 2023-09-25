@@ -1,8 +1,11 @@
+import { useAppSelector } from '@/hooks';
 import './style.scss';
 
 import { FC } from 'react';
 
 const Info: FC = () => {
+    const { userData } = useAppSelector((state) => state.user);
+
     return (
         <div className='info'>
             <div className='personal'>
@@ -11,9 +14,11 @@ const Info: FC = () => {
                     alt=''
                 />
                 <div className='user-data'>
-                    <h5 className='name'>Paşayev Asif Əli</h5>
-                    <p className='username'>Pashayevasif123</p>
-                    <p className='email'>asif.p@gmail.com</p>
+                    <h5 className='fullname'>
+                        {userData?.lastName} {userData?.firstName}
+                    </h5>
+                    <p className='username'>{userData?.username}</p>
+                    <p className='email'>{userData?.email}</p>
                 </div>
             </div>
             <div className='general'>
@@ -21,27 +26,27 @@ const Info: FC = () => {
                 <ul className='table'>
                     <li>
                         <p className='label'>Ad:</p>
-                        <p className='value'>Asif</p>
+                        <p className='value'>{userData?.firstName}</p>
                     </li>
                     <li>
                         <p className='label'>Ata adı:</p>
-                        <p className='value'>Əli</p>
+                        <p className='value'>{userData?.fatherName}</p>
                     </li>
                     <li>
                         <p className='label'>Doğum yeri:</p>
-                        <p className='value'>Bakı, Azərbaycan</p>
+                        <p className='value'>{userData?.birthPlace}</p>
                     </li>
                     <li>
                         <p className='label'>Soyad:</p>
-                        <p className='value'>Paşayev</p>
+                        <p className='value'>{userData?.firstName}</p>
                     </li>
                     <li>
                         <p className='label'>Doğum tarixi:</p>
-                        <p className='value'>12.04.1994</p>
+                        <p className='value'>{userData?.birthDate}</p>
                     </li>
                     <li>
                         <p className='label'>Cinsi:</p>
-                        <p className='value'>Kişi</p>
+                        <p className='value'>{userData?.gender}</p>
                     </li>
                 </ul>
             </div>

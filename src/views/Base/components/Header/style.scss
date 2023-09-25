@@ -6,6 +6,8 @@
     align-items: center;
     justify-content: space-between;
     &.fixed {
+        padding-top: 1.75rem;
+        padding-bottom: 1.75rem;
         background: linear-gradient(355deg, #ffffff70 -94.56%, rgba(169, 178, 254, 0.44) 155.3%);
         box-shadow: 0px 0px 93px 0px #16239824;
         backdrop-filter: blur(14.5px);

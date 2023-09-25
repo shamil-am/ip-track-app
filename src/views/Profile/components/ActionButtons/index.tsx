@@ -16,7 +16,7 @@ const ActionButtons: FC<IProps> = ({ isEditable, changeEditableStatus }) => {
             {isEditable ? (
                 <div className='editable'>
                     <Button label='İmtina' variant='gray' onClick={() => changeEditableStatus(false)} />
-                    <Button label='Yadda saxla' variant='violet' onClick={() => {}} />
+                    <Button label='Yadda saxla' variant='violet' form='edit-form' type='submit' />
                 </div>
             ) : (
                 <Button

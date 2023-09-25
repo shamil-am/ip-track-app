@@ -44,6 +44,11 @@
                     color: #ffffffe6;
                     font-size: 1rem;
                     font-weight: 600;
+                    transition: opacity 0.3s;
+                    &:hover,
+                    &:disabled {
+                        opacity: 0.7;
+                    }
                 }
             }
         }

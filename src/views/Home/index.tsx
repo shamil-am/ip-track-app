@@ -1,14 +1,16 @@
 import './style.scss';
 
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
-import { useAppSelector } from '@/hooks';
+import { useAppDispatch, useAppSelector } from '@/hooks';
 
 import IpInfoTable from './components/IpInfoTable';
 import Map from './components/Map';
+import { resetState } from '@/store/ipInfoSlice';
 
 const Home: FC = () => {
     const ipState = useAppSelector((state) => state.ip);
+    const dispatch = useAppDispatch();
 
     const markerCoords = ipState?.ipInfo
         ? {
@@ -16,6 +18,12 @@ const Home: FC = () => {
               lng: +ipState.ipInfo.location.lng,
           }
         : null;
+
+    useEffect(() => {
+        return () => {
+            dispatch(resetState());
+        };
+    }, []);
 
     return (
         <div className='home'>
